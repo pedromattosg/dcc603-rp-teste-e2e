@@ -68,4 +68,22 @@ describe('TODOMvc App', () => {
       .children()
       .should('have.length', 2);
   });
+
+  it('Limpa todas as tarefas completas', () => {
+    cy.visit(''); 
+
+    cy.get('[data-cy=todo-input]')
+      .type('Tarefa 1{enter}')
+      .type('Tarefa 2{enter}')
+
+    cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+      .click({ multiple: true });
+     
+    cy.get('[class=clear-completed]')
+      .click();
+
+    cy.get('[data-cy=todos-list] > li')
+      .should('have.length', 0)
+  });
+  
 });
