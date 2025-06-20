@@ -118,4 +118,25 @@ describe('TODOMvc App', () => {
     .children()
     .should('have.length', 1);
   });
+  
+  it('Marca todas tarefas completas', () => {
+  cy.visit(''); 
+
+  cy.get('[data-cy=todo-input]')
+    .type('Tarefa 1{enter}')
+    .type('Tarefa 2{enter}')
+    .type('Tarefa 3{enter}')
+    .type('Tarefa 4{enter}')
+
+  cy.get('[class=toggle-all-label]')
+    .click();
+
+  cy.get('[data-cy=filter-completed-link')
+    .click();
+  
+  cy.get('[data-cy=todos-list]')
+    .children()
+    .should('have.length', 4);
+  });
+
 });
