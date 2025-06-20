@@ -85,5 +85,37 @@ describe('TODOMvc App', () => {
     cy.get('[data-cy=todos-list] > li')
       .should('have.length', 0)
   });
+
+ it('Marca e desmarca tarefa completa', () => {
+  cy.visit(''); 
+
+  cy.get('[data-cy=todo-input]')
+    .type('Tarefa 1{enter}')
+
+  cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+    .first()
+    .click();
+
+  cy.get('[data-cy=filter-completed-link')
+    .click();
   
+  cy.get('[data-cy=todos-list]')
+    .children()
+    .should('have.length', 1);
+  
+  cy.get('[data-cy=todos-list] > li [data-cy=toggle-todo-checkbox]')
+    .first()
+    .click();
+
+  cy.get('[data-cy=todos-list]')
+    .children()
+    .should('have.length', 0);
+  
+  cy.get('[data-cy=filter-active-link')
+    .click();
+  
+  cy.get('[data-cy=todos-list]')
+    .children()
+    .should('have.length', 1);
+  });
 });
